@@ -12,4 +12,7 @@ public interface JogadoresRepository extends JpaRepository<Jogadores, Long> {
 
     @Query("select j from Jogadores j WHERE j.nomeJogador ILIKE %:nome AND j.titulosDeCopaDoMundo >= 1")
     List<Jogadores> buscarJogadoresPorTitulos(String nome);
+
+    @Query("select j from Jogadores j WHERE j.titulosDeCopaDoMundo >= 3")
+    List<Jogadores> findByMaiorCampeao();
 }
