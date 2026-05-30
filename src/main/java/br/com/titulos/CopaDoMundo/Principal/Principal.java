@@ -35,8 +35,8 @@ public class Principal {
         while (opcao != 0) {
             var menu = """
                     1- Cadastrar seleções
-                    2- Cadastrar titulos de copa do mundo
-                    3- Listar selecões
+                    2- Cadastrar títulos de copa do mundo
+                    3- Listar seleções
                     4- Listar campeões
                     5- Buscar títulos por seleção
                     6- Buscar dados de uma seleção
@@ -44,7 +44,8 @@ public class Principal {
                     8- Listar jogadores
                     9- Listar jogadores campeões do mundo
                     10- Buscar titulos por jogadores
-                    11- Buscar dados de um jogador
+                    11- Buscar maior jogador vencedor por títulos
+                    12- Buscar dados de um jogador
                     0- Sair
                     """;
 
@@ -84,6 +85,9 @@ public class Principal {
                     buscarTitulosPorJogadores();
                     break;
                 case 11:
+                    buscarMaiorJogadorVencedorPorTitulos();
+                    break;
+                case 12:
                     buscarDadosDeUmJogador();
                     break;
                 case 0:
@@ -219,7 +223,14 @@ public class Principal {
         var nome = leitura.nextLine();
 
         List<Jogadores> jogadores = jogadoresRepository.buscarJogadoresPorTitulos(nome);
-        jogadores.forEach(j -> System.out.println("Jogador: " + j.getNomeJogador() + ", títulos: " + j.getTitulosDeCopaDoMundo() + ", seleção: " +j.getSelecoes().getNome()));
+        jogadores.forEach(j -> System.out.println("Jogador: " + j.getNomeJogador() + ", títulos: " +
+                j.getTitulosDeCopaDoMundo() + ", seleção: " +j.getSelecoes().getNome()));
+    }
+
+    private void buscarMaiorJogadorVencedorPorTitulos() {
+        List<Jogadores> jogadores = jogadoresRepository.findByMaiorCampeao();
+        jogadores.forEach(j -> System.out.println("Jogador mais vencedor: " + j.getNomeJogador() + ", títulos: " +
+                j.getTitulosDeCopaDoMundo() + " de copa do mundo"));
     }
 
     private void buscarDadosDeUmJogador() throws IOException, InterruptedException {
