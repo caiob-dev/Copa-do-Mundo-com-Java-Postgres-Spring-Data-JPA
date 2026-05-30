@@ -62,3 +62,17 @@ Este projeto foi desenvolvido com o objetivo de aprofundar conhecimentos em:
     PostgreSQL,
     Consultas JPQL,
     Relacionamentos entre entidades
+    
+▶️ Executando o projeto
+
+Clone o repositório:
+
+git clone https://github.com/caiob-dev/Copa-do-Mundo-com-Java-Postgres-Spring-Data-JPA.git
+
+Entre na pasta:
+
+cd Copa-do-Mundo-com-Java-Postgres-Spring-Data-JPA
+
+Execute:
+
+mvn spring-boot:run
