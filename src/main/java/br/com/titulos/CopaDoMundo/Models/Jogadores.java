@@ -1,5 +1,6 @@
 package br.com.titulos.CopaDoMundo.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class Jogadores {
     private Integer titulosDeCopaDoMundo;
 
     @ManyToOne()
+    @JsonIgnore
     private Selecoes selecoes;
 
     public Jogadores() {

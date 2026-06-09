@@ -230,7 +230,7 @@ public class Principal {
     private void buscarMaiorJogadorVencedorPorTitulos() {
         List<Jogadores> jogadores = jogadoresRepository.findByMaiorCampeao();
         jogadores.forEach(j -> System.out.println("Jogador mais vencedor: " + j.getNomeJogador() + ", títulos: " +
-                j.getTitulosDeCopaDoMundo() + " de copa do mundo"));
+                j.getTitulosDeCopaDoMundo()));
     }
 
     private void buscarDadosDeUmJogador() throws IOException, InterruptedException {

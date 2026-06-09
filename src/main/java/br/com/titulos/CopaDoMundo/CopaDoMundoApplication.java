@@ -10,23 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CopaDoMundoApplication implements CommandLineRunner {
-	@Autowired
-	private SelecoesRepository selecoesRepository;
-
-	@Autowired
-	private TitulosRepository titulosRepository;
-
-	@Autowired
-	private JogadoresRepository artilheirosRepository;
-
+public class CopaDoMundoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CopaDoMundoApplication.class, args);
 	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		Principal p = new Principal(selecoesRepository, titulosRepository, artilheirosRepository);
-		p.exibirMenu();
 	}
-}
