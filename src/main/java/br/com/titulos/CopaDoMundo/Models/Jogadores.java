@@ -19,6 +19,8 @@ public class Jogadores {
 
     private Integer titulosDeCopaDoMundo;
 
+    private String foto;
+
     @ManyToOne()
     @JsonIgnore
     private Selecoes selecoes;
@@ -70,6 +72,14 @@ public class Jogadores {
 
     public void setTitulosDeCopaDoMundo(Integer titulosDeCopaDoMundo) {
         this.titulosDeCopaDoMundo = titulosDeCopaDoMundo;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override

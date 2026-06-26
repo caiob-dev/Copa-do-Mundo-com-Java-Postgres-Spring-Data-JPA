@@ -22,6 +22,8 @@ public class Selecoes {
 
     private Integer partipacoes;
 
+    private String bandeira;
+
     public Selecoes() {
     }
 
@@ -68,6 +70,18 @@ public class Selecoes {
 
     public void setArtilheiros(List<Jogadores> jogadores) {
         this.jogadores = jogadores;
+    }
+
+    public void setJogadores(List<Jogadores> jogadores) {
+        this.jogadores = jogadores;
+    }
+
+    public String getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
     }
 
     @Override

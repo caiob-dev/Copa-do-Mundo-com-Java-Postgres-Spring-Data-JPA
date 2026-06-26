@@ -3,6 +3,7 @@ package br.com.titulos.CopaDoMundo.Service;
 import br.com.titulos.CopaDoMundo.DTO.Selecoes.SelecoesDTO;
 import br.com.titulos.CopaDoMundo.DTO.Selecoes.SelecoesDetalhesDTO;
 import br.com.titulos.CopaDoMundo.DTO.Selecoes.Top5SelecoesDTO;
+import br.com.titulos.CopaDoMundo.Models.Jogadores;
 import br.com.titulos.CopaDoMundo.Models.Selecoes;
 import br.com.titulos.CopaDoMundo.Models.StatusTitulo;
 import br.com.titulos.CopaDoMundo.Repositories.SelecoesRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,7 +22,7 @@ public class SelecoesService {
 
 
     public List<SelecoesDTO> obterSelecoes() {
-        return selecoesRepository.findAll().stream()
+        return selecoesRepository.findSelecoesOrderByNome().stream()
                 .map(this::toDTOSimple).toList();
     }
 
@@ -50,7 +52,21 @@ public class SelecoesService {
             statusTitulo = s.getTitulos().getFirst().getStatusTitulo().getStatusEmPortugues();
         }
 
-        return new SelecoesDetalhesDTO(s.getId(), s.getNome(), s.getPartipacoes(), quantidadeTitulos, statusTitulo, s.getJogadores().getFirst().getNomeJogador(), s.getJogadores().getFirst().getTitulosDeCopaDoMundo());
+        Integer maiorNumeroDeTitulos = s.getJogadores().stream()
+                .mapToInt(j -> j.getTitulosDeCopaDoMundo()).max().orElse(0);
+
+        List<String> maioresVencedores = Collections.emptyList();
+
+        if (maiorNumeroDeTitulos > 0) {
+            maioresVencedores = s.getJogadores().stream()
+                    .filter(j -> j.getTitulosDeCopaDoMundo().equals(maiorNumeroDeTitulos)).
+                    map(j -> j.getNomeJogador()).toList();
+        }
+
+        return new SelecoesDetalhesDTO(s.getId(), s.getNome(), s.getPartipacoes(), quantidadeTitulos,
+                statusTitulo, maioresVencedores, maiorNumeroDeTitulos, s.getBandeira(),
+                s.getJogadores().stream().map(j -> j.getNomeJogador()).toList(),
+                s.getJogadores().stream().map(j -> j.getNumeroDeGols()).sorted().toList().reversed());
     }
     
     private SelecoesDTO toDTOSimple (Selecoes s) {

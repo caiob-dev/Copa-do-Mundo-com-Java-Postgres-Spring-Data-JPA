@@ -22,6 +22,11 @@ public class JogadoresService {
                 .toList();
     }
 
+    public List<JogadoresDTO> obterArtilheiros() {
+        return jogadoresRepository.findTop10Artilheiros().stream()
+                .map(this::toDTOSimple).toList();
+    }
+
     public JogadoresDetalhesDTO obterJogadoresPorId(Long id) {
         return jogadoresRepository.findById(id).map(this::toDTODetails).orElseThrow(() -> new RuntimeException("Jogador não encontrado!"));
     }
@@ -37,11 +42,11 @@ public class JogadoresService {
     }
 
     private JogadoresDTO toDTOSimple(Jogadores j) {
-        return new JogadoresDTO(j.getId(), j.getNomeJogador());
+        return new JogadoresDTO(j.getId(), j.getNomeJogador(), j.getNumeroDeGols(), j.getSelecoes().getNome());
     }
 
     private JogadoresDetalhesDTO toDTODetails(Jogadores j) {
-        return new JogadoresDetalhesDTO(j.getNumeroDeGols(), j.getTitulosDeCopaDoMundo(), j.getSelecoes().getNome());
+        return new JogadoresDetalhesDTO(j.getId(), j.getNomeJogador(), j.getNumeroDeGols(), j.getTitulosDeCopaDoMundo(), j.getSelecoes().getNome(), j.getFoto());
     }
 
     private JogadoresCampeoesDTO toDTOCampeoes(Jogadores j) {

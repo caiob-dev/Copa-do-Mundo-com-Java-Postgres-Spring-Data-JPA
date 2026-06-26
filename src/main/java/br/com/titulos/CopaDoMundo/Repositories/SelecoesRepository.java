@@ -18,4 +18,7 @@ public interface SelecoesRepository extends JpaRepository<Selecoes, Long> {
 
     @Query("select s from Selecoes s JOIN s.titulos t ORDER BY t.quantidadeTitulos DESC ")
     List<Selecoes> findTop5Selecoes(Pageable pageable);
+
+    @Query("select s from Selecoes s ORDER BY s.nome")
+    List<Selecoes> findSelecoesOrderByNome();
 }

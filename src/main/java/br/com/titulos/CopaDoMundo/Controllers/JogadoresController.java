@@ -3,6 +3,7 @@ package br.com.titulos.CopaDoMundo.Controllers;
 import br.com.titulos.CopaDoMundo.DTO.Jogadores.JogadoresCampeoesDTO;
 import br.com.titulos.CopaDoMundo.DTO.Jogadores.JogadoresDTO;
 import br.com.titulos.CopaDoMundo.DTO.Jogadores.JogadoresDetalhesDTO;
+import br.com.titulos.CopaDoMundo.Models.Jogadores;
 import br.com.titulos.CopaDoMundo.Repositories.JogadoresRepository;
 import br.com.titulos.CopaDoMundo.Service.JogadoresService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,12 @@ public class JogadoresController {
         return jogadoresService.obterJogadores();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/artilheiros")
+    public List<JogadoresDTO> getArtilheiros() {
+        return jogadoresService.obterArtilheiros();
+    }
+
+    @GetMapping("/artilheiros/{id}")
     public JogadoresDetalhesDTO getJogadoresPorID(@PathVariable Long id) {
         return jogadoresService.obterJogadoresPorId(id);
     }
